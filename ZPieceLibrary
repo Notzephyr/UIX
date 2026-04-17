@@ -1,11 +1,13 @@
 local Library = {}
 local CrimsonVibe = {
-	Accent = Color3.fromRGB(220, 20, 60),
-	Dark = Color3.fromRGB(120, 10, 35),
-	Background = Color3.fromRGB(35, 8, 18),
-	Surface = Color3.fromRGB(55, 12, 28),
-	Border = Color3.fromRGB(120, 10, 35),
-	Muted = Color3.fromRGB(190, 90, 115)
+	Accent = Color3.fromRGB(205, 32, 55),
+	AccentSoft = Color3.fromRGB(255, 75, 95),
+	Dark = Color3.fromRGB(105, 12, 28),
+	Background = Color3.fromRGB(31, 7, 14),
+	Surface = Color3.fromRGB(48, 12, 22),
+	SurfaceLight = Color3.fromRGB(70, 18, 32),
+	Border = Color3.fromRGB(132, 22, 42),
+	Muted = Color3.fromRGB(205, 105, 120)
 }
 function Library:TweenInstance(Instance, Time, OldValue, NewValue)
 	local rz_Tween = game:GetService("TweenService"):Create(Instance, TweenInfo.new(Time, Enum.EasingStyle.Quad),
@@ -264,7 +266,7 @@ function Library:NewWindow(ConfigWindow)
 	Icon.BorderSizePixel = 0
 	Icon.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Icon.Size = UDim2.new(0, 20, 0, 20)
-	Icon.Image = "rbxassetid://108190681993322"
+	Icon.Image = "rbxassetid://136452605242985"
 	Icon.ImageRectOffset = Vector2.new(288, 672)
 	Icon.ImageRectSize = Vector2.new(96, 96)
 
@@ -289,7 +291,7 @@ function Library:NewWindow(ConfigWindow)
 	Icon_2.BorderSizePixel = 0
 	Icon_2.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Icon_2.Size = UDim2.new(0, 18, 0, 18)
-	Icon_2.Image = "rbxassetid://108190681993322"
+	Icon_2.Image = "rbxassetid://136452605242985"
 	Icon_2.ImageRectOffset = Vector2.new(580, 194)
 	Icon_2.ImageRectSize = Vector2.new(96, 96)
 
@@ -467,6 +469,15 @@ function Library:NewWindow(ConfigWindow)
 	SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 	SearchBox.TextSize = 13.000
 	SearchBox.TextXAlignment = Enum.TextXAlignment.Left
+	SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
+		local Query = string.lower(SearchBox.Text or "")
+		for _, Item in next, ScrollingTab:GetChildren() do
+			if Item:IsA("Frame") and Item:FindFirstChild("NameTab") then
+				local TabName = string.lower(Item.NameTab.Text or "")
+				Item.Visible = Query == "" or string.find(TabName, Query, 1, true) ~= nil
+			end
+		end
+	end)
 
 	ScrollingTab.Name = "ScrollingTab"
 	ScrollingTab.Parent = TabFrame
@@ -1002,7 +1013,7 @@ function Library:NewWindow(ConfigWindow)
 				Selects.Name = "Selects"
 				Selects.Parent = Dropdown
 				Selects.AnchorPoint = Vector2.new(0, 0.5)
-				Selects.BackgroundColor3 = CrimsonVibe.Surface
+				Selects.BackgroundColor3 = CrimsonVibe.SurfaceLight
 				Selects.BorderColor3 = CrimsonVibe.Border
 				Selects.BorderSizePixel = 0
 				Selects.Position = UDim2.new(1, -90, 0.5, 0)
@@ -1177,6 +1188,17 @@ function Library:NewWindow(ConfigWindow)
 				UIPadding_5.PaddingRight = UDim.new(0, 7)
 				UIPadding_5.PaddingTop = UDim.new(0, 7)
 
+				local function UpdateDropdownSearch()
+					local Query = string.lower(TextBox.Text or "")
+					for _, Item in next, Real_List:GetChildren() do
+						if Item:IsA("Frame") and Item:FindFirstChild("Title") then
+							local OptionName = string.lower(Item.Title.Text or "")
+							Item.Visible = Query == "" or string.find(OptionName, Query, 1, true) ~= nil
+						end
+					end
+				end
+				TextBox:GetPropertyChangedSignal("Text"):Connect(UpdateDropdownSearch)
+
 				local UICorner_29 = Instance.new("UICorner")
 				UICorner_29.Parent = DropdownZone
 				Drop_Click.Activated:Connect(function()
@@ -1277,6 +1299,7 @@ function Library:NewWindow(ConfigWindow)
 							DropFunc:Set(DropFunc.Value)
 						end
 					end)
+					UpdateDropdownSearch()
 				end
 
 				function DropFunc:Clear()
@@ -1358,7 +1381,7 @@ function Library:NewWindow(ConfigWindow)
 				TextboxFrame.Name = "TextboxFrame"
 				TextboxFrame.Parent = Input
 				TextboxFrame.AnchorPoint = Vector2.new(0, 0.5)
-				TextboxFrame.BackgroundColor3 = CrimsonVibe.Surface
+				TextboxFrame.BackgroundColor3 = CrimsonVibe.SurfaceLight
 				TextboxFrame.BorderColor3 = CrimsonVibe.Border
 				TextboxFrame.BorderSizePixel = 0
 				TextboxFrame.Position = UDim2.new(1, -140, 0.5, 0)
@@ -1465,7 +1488,7 @@ function Library:NewWindow(ConfigWindow)
 				SliderFrame.Name = "SliderFrame"
 				SliderFrame.Parent = Slider
 				SliderFrame.AnchorPoint = Vector2.new(0, 0.5)
-				SliderFrame.BackgroundColor3 = CrimsonVibe.Surface
+				SliderFrame.BackgroundColor3 = CrimsonVibe.SurfaceLight
 				SliderFrame.BorderColor3 = CrimsonVibe.Border
 				SliderFrame.BorderSizePixel = 0
 				SliderFrame.Position = UDim2.new(1, -140, 0.5, 0)
