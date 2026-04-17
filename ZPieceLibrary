@@ -1696,7 +1696,7 @@ function Library:NewWindow(ConfigWindow)
 	self:MakeDraggable(G2L["2"],G2L["2"])
 	-- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
 	G2L["2"]["BackgroundColor3"] = CrimsonVibe.Surface;
-	G2L["2"]["Image"] = [[rbxassetid://124762714875426]];
+	G2L["2"]["Image"] = [[rbxassetid://108190681993322]];
 	G2L["2"]["Size"] = UDim2.new(0, 50, 0, 50);
 	G2L["2"]["BorderColor3"] = CrimsonVibe.Border;
 	G2L["2"]["Position"] = UDim2.new(0.26651, 0, 0.43687, 0);
