@@ -75,9 +75,8 @@ function Library:UpdateContent(Content, Title, Object)
 end
 
 function Library:UpdateScrolling(Scroll, List)
-	List:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-		Scroll.CanvasSize = UDim2.new(0, 0, 0, List.AbsoluteContentSize.Y + 15)
-	end)
+	Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 end
 
 function Library:MouseEvent(Skibidi, ...)
@@ -773,8 +772,8 @@ function Library:NewWindow(ConfigWindow)
 			Section.BackgroundTransparency = 0.88
 			Section.BorderColor3 = CrimsonVibe.Border
 			Section.BorderSizePixel = 0
-			Section.Position = UDim2.new(1.36775815, 0, 0.545454562, 0)
-			Section.Size = UDim2.new(1, 0, 0, 55)
+			Section.Size = UDim2.new(1, 0, 0, 0)
+			Section.AutomaticSize = Enum.AutomaticSize.Y
 
 			UICorner_5.CornerRadius = UDim.new(0, 4)
 			UICorner_5.Parent = Section
@@ -823,7 +822,8 @@ function Library:NewWindow(ConfigWindow)
 			SectionList.BorderColor3 = CrimsonVibe.Border
 			SectionList.BorderSizePixel = 0
 			SectionList.Position = UDim2.new(0, 0, 0, 35)
-			SectionList.Size = UDim2.new(1, 0, 1, -35)
+			SectionList.Size = UDim2.new(1, 0, 0, 0)
+			SectionList.AutomaticSize = Enum.AutomaticSize.Y
 
 			UIPadding_4.Parent = SectionList
 			UIPadding_4.PaddingBottom = UDim.new(0, 7)
@@ -834,9 +834,7 @@ function Library:NewWindow(ConfigWindow)
 			UIListLayout_4.Parent = SectionList
 			UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
 			UIListLayout_4.Padding = UDim.new(0, 6)
-			UIListLayout_4:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-				Section.Size = UDim2.new(1, 0, 0, UIListLayout_4.AbsoluteContentSize.Y + 55)
-			end)
+
 			local SectionFunc = {}
 			function SectionFunc:AddToggle(cftoggle)
 				local cftoggle = Library:MakeConfig({
